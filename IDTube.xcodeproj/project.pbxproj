@@ -1,0 +1,427 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		789992811E30CB7E008C62B9 /* GradientNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 789992801E30CB7E008C62B9 /* GradientNode.m */; };
+		789992841E30CBCF008C62B9 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 789992831E30CBCF008C62B9 /* UIImage+ImageEffects.m */; };
+		78F77BB31E2F75FC00E3F75A /* MosaicCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F77BB21E2F75FC00E3F75A /* MosaicCollectionViewLayout.swift */; };
+		78F77BB51E2F765900E3F75A /* ImageCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F77BB41E2F765900E3F75A /* ImageCellNode.swift */; };
+		78FD21FA1E2CF4D500C761D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FD21F91E2CF4D500C761D4 /* AppDelegate.swift */; };
+		78FD21FC1E2CF4D500C761D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FD21FB1E2CF4D500C761D4 /* ViewController.swift */; };
+		78FD21FF1E2CF4D500C761D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78FD21FD1E2CF4D500C761D4 /* Main.storyboard */; };
+		78FD22011E2CF4D500C761D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78FD22001E2CF4D500C761D4 /* Assets.xcassets */; };
+		78FD22041E2CF4D500C761D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78FD22021E2CF4D500C761D4 /* LaunchScreen.storyboard */; };
+		78FD220D1E2CF9F600C761D4 /* ServerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FD220C1E2CF9F600C761D4 /* ServerProvider.swift */; };
+		930E1421A61C46340F3C7441 /* Pods_IDTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4277BEC0DE1FF7AF23791531 /* Pods_IDTube.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4277BEC0DE1FF7AF23791531 /* Pods_IDTube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IDTube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		745D14504F200362186B3B84 /* Pods-IDTube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IDTube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IDTube/Pods-IDTube.debug.xcconfig"; sourceTree = "<group>"; };
+		7899927B1E30CB31008C62B9 /* IDTube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IDTube-Bridging-Header.h"; sourceTree = "<group>"; };
+		7899927F1E30CB7E008C62B9 /* GradientNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientNode.h; sourceTree = "<group>"; };
+		789992801E30CB7E008C62B9 /* GradientNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientNode.m; sourceTree = "<group>"; };
+		789992821E30CBCF008C62B9 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		789992831E30CBCF008C62B9 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		78F77BB21E2F75FC00E3F75A /* MosaicCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MosaicCollectionViewLayout.swift; sourceTree = "<group>"; };
+		78F77BB41E2F765900E3F75A /* ImageCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCellNode.swift; sourceTree = "<group>"; };
+		78FD21F61E2CF4D500C761D4 /* IDTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IDTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		78FD21F91E2CF4D500C761D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		78FD21FB1E2CF4D500C761D4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		78FD21FE1E2CF4D500C761D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		78FD22001E2CF4D500C761D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		78FD22031E2CF4D500C761D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		78FD22051E2CF4D500C761D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		78FD220C1E2CF9F600C761D4 /* ServerProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerProvider.swift; sourceTree = "<group>"; };
+		CED17BA9223ED9946B92FBE1 /* Pods-IDTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IDTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-IDTube/Pods-IDTube.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		78FD21F31E2CF4D500C761D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				930E1421A61C46340F3C7441 /* Pods_IDTube.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		367BD3530925C35E5903DE04 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				745D14504F200362186B3B84 /* Pods-IDTube.debug.xcconfig */,
+				CED17BA9223ED9946B92FBE1 /* Pods-IDTube.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		78FD21ED1E2CF4D500C761D4 = {
+			isa = PBXGroup;
+			children = (
+				78FD21F81E2CF4D500C761D4 /* IDTube */,
+				78FD21F71E2CF4D500C761D4 /* Products */,
+				367BD3530925C35E5903DE04 /* Pods */,
+				CFEBCD89413E3E338783508E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		78FD21F71E2CF4D500C761D4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				78FD21F61E2CF4D500C761D4 /* IDTube.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		78FD21F81E2CF4D500C761D4 /* IDTube */ = {
+			isa = PBXGroup;
+			children = (
+				789992821E30CBCF008C62B9 /* UIImage+ImageEffects.h */,
+				789992831E30CBCF008C62B9 /* UIImage+ImageEffects.m */,
+				7899927F1E30CB7E008C62B9 /* GradientNode.h */,
+				789992801E30CB7E008C62B9 /* GradientNode.m */,
+				78FD220B1E2CF98000C761D4 /* API */,
+				78FD21F91E2CF4D500C761D4 /* AppDelegate.swift */,
+				7899927B1E30CB31008C62B9 /* IDTube-Bridging-Header.h */,
+				78FD21FB1E2CF4D500C761D4 /* ViewController.swift */,
+				78F77BB21E2F75FC00E3F75A /* MosaicCollectionViewLayout.swift */,
+				78F77BB41E2F765900E3F75A /* ImageCellNode.swift */,
+				78FD21FD1E2CF4D500C761D4 /* Main.storyboard */,
+				78FD22001E2CF4D500C761D4 /* Assets.xcassets */,
+				78FD22021E2CF4D500C761D4 /* LaunchScreen.storyboard */,
+				78FD22051E2CF4D500C761D4 /* Info.plist */,
+			);
+			path = IDTube;
+			sourceTree = "<group>";
+		};
+		78FD220B1E2CF98000C761D4 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				78FD220C1E2CF9F600C761D4 /* ServerProvider.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		CFEBCD89413E3E338783508E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4277BEC0DE1FF7AF23791531 /* Pods_IDTube.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		78FD21F51E2CF4D500C761D4 /* IDTube */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 78FD22081E2CF4D500C761D4 /* Build configuration list for PBXNativeTarget "IDTube" */;
+			buildPhases = (
+				A5BE6D956AFC214550216F1B /* [CP] Check Pods Manifest.lock */,
+				78FD21F21E2CF4D500C761D4 /* Sources */,
+				78FD21F31E2CF4D500C761D4 /* Frameworks */,
+				78FD21F41E2CF4D500C761D4 /* Resources */,
+				77F0FC59B44B303F519CCABE /* [CP] Embed Pods Frameworks */,
+				F616C464EABA366D3A0CD2F3 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IDTube;
+			productName = IDTube;
+			productReference = 78FD21F61E2CF4D500C761D4 /* IDTube.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		78FD21EE1E2CF4D500C761D4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				TargetAttributes = {
+					78FD21F51E2CF4D500C761D4 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 5U67EGLCUP;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = 78FD21F11E2CF4D500C761D4 /* Build configuration list for PBXProject "IDTube" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 78FD21ED1E2CF4D500C761D4;
+			productRefGroup = 78FD21F71E2CF4D500C761D4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				78FD21F51E2CF4D500C761D4 /* IDTube */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		78FD21F41E2CF4D500C761D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78FD22041E2CF4D500C761D4 /* LaunchScreen.storyboard in Resources */,
+				78FD22011E2CF4D500C761D4 /* Assets.xcassets in Resources */,
+				78FD21FF1E2CF4D500C761D4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		77F0FC59B44B303F519CCABE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IDTube/Pods-IDTube-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A5BE6D956AFC214550216F1B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F616C464EABA366D3A0CD2F3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IDTube/Pods-IDTube-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		78FD21F21E2CF4D500C761D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78F77BB31E2F75FC00E3F75A /* MosaicCollectionViewLayout.swift in Sources */,
+				789992811E30CB7E008C62B9 /* GradientNode.m in Sources */,
+				789992841E30CBCF008C62B9 /* UIImage+ImageEffects.m in Sources */,
+				78FD220D1E2CF9F600C761D4 /* ServerProvider.swift in Sources */,
+				78FD21FC1E2CF4D500C761D4 /* ViewController.swift in Sources */,
+				78F77BB51E2F765900E3F75A /* ImageCellNode.swift in Sources */,
+				78FD21FA1E2CF4D500C761D4 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		78FD21FD1E2CF4D500C761D4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				78FD21FE1E2CF4D500C761D4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		78FD22021E2CF4D500C761D4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				78FD22031E2CF4D500C761D4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		78FD22061E2CF4D500C761D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		78FD22071E2CF4D500C761D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		78FD22091E2CF4D500C761D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 745D14504F200362186B3B84 /* Pods-IDTube.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5U67EGLCUP;
+				INFOPLIST_FILE = IDTube/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.igoronix.IDTube;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "94900ba2-c28b-421e-9640-5884519d97eb";
+				PROVISIONING_PROFILE_SPECIFIER = "Development wildcard profile";
+				SWIFT_OBJC_BRIDGING_HEADER = "IDTube/IDTube-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		78FD220A1E2CF4D500C761D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CED17BA9223ED9946B92FBE1 /* Pods-IDTube.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = IDTube/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.igoronix.IDTube;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "IDTube/IDTube-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		78FD21F11E2CF4D500C761D4 /* Build configuration list for PBXProject "IDTube" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78FD22061E2CF4D500C761D4 /* Debug */,
+				78FD22071E2CF4D500C761D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		78FD22081E2CF4D500C761D4 /* Build configuration list for PBXNativeTarget "IDTube" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78FD22091E2CF4D500C761D4 /* Debug */,
+				78FD220A1E2CF4D500C761D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 78FD21EE1E2CF4D500C761D4 /* Project object */;
+}
