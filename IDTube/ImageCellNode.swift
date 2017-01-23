@@ -22,13 +22,11 @@ import AsyncDisplayKit
 
 class ImageCellNode: ASCellNode {
     
-    fileprivate let backgroundImageNode: ASImageNode
     fileprivate let animalImageNode: ASNetworkImageNode
     fileprivate let animalDescriptionTextNode: ASTextNode
     
     required init(with title:String?, imageUrl:String?) {
         
-        backgroundImageNode = ASImageNode()
         animalImageNode = ASNetworkImageNode()
         animalDescriptionTextNode = ASTextNode()
         
@@ -41,46 +39,41 @@ class ImageCellNode: ASCellNode {
         animalImageNode.url = URL(string: imageUrl!)
         animalImageNode.clipsToBounds = true
         animalImageNode.delegate = self
-        animalImageNode.placeholderFadeDuration = 0.15
+        animalImageNode.placeholderFadeDuration = 0.25
         animalImageNode.contentMode = .scaleAspectFill
         animalImageNode.shouldRenderProgressImages = true
         animalImageNode.placeholderEnabled = true
-        animalImageNode.placeholderColor = UIColor(white: 0.777, alpha: 1.0)
+        animalImageNode.shouldCacheImage = true
+        animalImageNode.backgroundColor = UIColor(white: 0.777, alpha: 1.0)
         
         //Animal Description
         animalDescriptionTextNode.attributedText = NSAttributedString(string: title!)
         animalDescriptionTextNode.backgroundColor = UIColor.clear
         animalDescriptionTextNode.placeholderEnabled = true
-        animalDescriptionTextNode.placeholderFadeDuration = 0.15
+        animalDescriptionTextNode.placeholderFadeDuration = 0.25
         animalDescriptionTextNode.placeholderColor = UIColor(white: 0.777, alpha: 1.0)
-        
-//        //Background Image
-        backgroundImageNode.placeholderFadeDuration = 0.15
-        backgroundImageNode.imageModificationBlock = { image in
-            let newImage = UIImage.resize(image, newSize: CGSize(width: image.size.width, height: image.size.height)).applyBlur(withRadius: 10, tintColor: UIColor(white: 0.8, alpha: 0.3), saturationDeltaFactor: 1.8, maskImage: nil)
-            return (newImage != nil) ? newImage : image
-        }
-        
-        addSubnode(backgroundImageNode)
+    
         addSubnode(animalImageNode)
-        
         addSubnode(animalDescriptionTextNode)
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        var imageRatio: CGFloat = 0.5
+        var imageRatio: CGFloat = 0.75
         if animalImageNode.image != nil {
             imageRatio = (animalImageNode.image?.size.height)! / (animalImageNode.image?.size.width)!
         }
         
+        var newRatio = 1-imageRatio;
         let imageRatioSpec = ASRatioLayoutSpec(ratio: imageRatio, child: animalImageNode)
-        let imageRatioSpec2 = ASRatioLayoutSpec(ratio: 1-imageRatio, child: animalDescriptionTextNode)
+        
+        if newRatio <= 0 {
+            newRatio = 0.25
+        }
+        let imageRatioSpec2 = ASRatioLayoutSpec(ratio: newRatio, child: animalDescriptionTextNode)
         
         let verticalStackSpec = ASStackLayoutSpec(direction: .vertical, spacing: 3, justifyContent: .center, alignItems: .stretch, children: [imageRatioSpec, imageRatioSpec2])
         
-        let backgroundLayoutSpec = ASBackgroundLayoutSpec(child: verticalStackSpec, background: backgroundImageNode)
-        
-        return backgroundLayoutSpec
+        return verticalStackSpec
     }
 }
 
@@ -88,7 +81,6 @@ class ImageCellNode: ASCellNode {
 
 extension ImageCellNode: ASNetworkImageNodeDelegate {
     func imageNode(_ imageNode: ASNetworkImageNode, didLoad image: UIImage) {
-        backgroundImageNode.image = image
         self.setNeedsLayout()
     }
 }
