@@ -27,6 +27,7 @@ class ServerProvider {
     }
     
     class func performRequest<T: ResponseObjectSerializable>(request: URLRequest, type: T.Type, successCompletion:@escaping (_ result: AnyObject?) -> Void, failureCompletion:@escaping (_ error: AnyObject?) -> Void)  {
+        
         Alamofire.request(request).responseObject { (response: DataResponse<T>) in
             if let value = response.result.value {
                 successCompletion(value as AnyObject?)

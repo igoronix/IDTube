@@ -26,34 +26,35 @@ class ImageCellNode: ASCellNode {
     fileprivate let animalImageNode: ASNetworkImageNode
     fileprivate let animalDescriptionTextNode: ASTextNode
     
-    required init(with title:String?, url:String?) {
+    required init(with title:String?, imageUrl:String?) {
         
         backgroundImageNode = ASImageNode()
-        animalImageNode     = ASNetworkImageNode()
+        animalImageNode = ASNetworkImageNode()
         animalDescriptionTextNode = ASTextNode()
         
         super.init()
         
-        backgroundColor = UIColor.lightGray
+        backgroundColor = UIColor.white
         clipsToBounds = true
         
         //Animal Image
-        animalImageNode.url = URL(string: url!)
+        animalImageNode.url = URL(string: imageUrl!)
         animalImageNode.clipsToBounds = true
         animalImageNode.delegate = self
         animalImageNode.placeholderFadeDuration = 0.15
         animalImageNode.contentMode = .scaleAspectFill
         animalImageNode.shouldRenderProgressImages = true
+        animalImageNode.placeholderEnabled = true
+        animalImageNode.placeholderColor = UIColor(white: 0.777, alpha: 1.0)
         
         //Animal Description
         animalDescriptionTextNode.attributedText = NSAttributedString(string: title!)
-//        animalDescriptionTextNode.truncationAttributedText = NSAttributedString(forDescription: "…")
         animalDescriptionTextNode.backgroundColor = UIColor.clear
         animalDescriptionTextNode.placeholderEnabled = true
         animalDescriptionTextNode.placeholderFadeDuration = 0.15
         animalDescriptionTextNode.placeholderColor = UIColor(white: 0.777, alpha: 1.0)
         
-        //Background Image
+//        //Background Image
         backgroundImageNode.placeholderFadeDuration = 0.15
         backgroundImageNode.imageModificationBlock = { image in
             let newImage = UIImage.resize(image, newSize: CGSize(width: image.size.width, height: image.size.height)).applyBlur(withRadius: 10, tintColor: UIColor(white: 0.8, alpha: 0.3), saturationDeltaFactor: 1.8, maskImage: nil)
@@ -69,24 +70,17 @@ class ImageCellNode: ASCellNode {
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         var imageRatio: CGFloat = 0.5
         if animalImageNode.image != nil {
-//            imageRatio = (animalImageNode.image?.size.height)! / (animalImageNode.image?.size.width)!
-            imageRatio = constrainedSize.min.height/constrainedSize.max.width
+            imageRatio = (animalImageNode.image?.size.height)! / (animalImageNode.image?.size.width)!
         }
         
         let imageRatioSpec = ASRatioLayoutSpec(ratio: imageRatio, child: animalImageNode)
+        let imageRatioSpec2 = ASRatioLayoutSpec(ratio: 1-imageRatio, child: animalDescriptionTextNode)
         
-        let relativeSpec = ASRelativeLayoutSpec(
-            horizontalPosition: .start,
-            verticalPosition: .end,
-            sizingOption: ASRelativeLayoutSpecSizingOption(rawValue:0),
-            child: animalDescriptionTextNode)
+        let verticalStackSpec = ASStackLayoutSpec(direction: .vertical, spacing: 3, justifyContent: .center, alignItems: .stretch, children: [imageRatioSpec, imageRatioSpec2])
         
-        let verticalStackSpec = ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .center, alignItems: .stretch, children: [imageRatioSpec, relativeSpec])
-        verticalStackSpec.style.flexShrink = 1.0
+        let backgroundLayoutSpec = ASBackgroundLayoutSpec(child: verticalStackSpec, background: backgroundImageNode)
         
-//        let backgroundLayoutSpec = ASBackgroundLayoutSpec(child: verticalStackSpec, background: backgroundImageNode)
-        
-        return verticalStackSpec
+        return backgroundLayoutSpec
     }
 }
 
@@ -95,5 +89,6 @@ class ImageCellNode: ASCellNode {
 extension ImageCellNode: ASNetworkImageNodeDelegate {
     func imageNode(_ imageNode: ASNetworkImageNode, didLoad image: UIImage) {
         backgroundImageNode.image = image
+        self.setNeedsLayout()
     }
 }

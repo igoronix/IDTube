@@ -56,7 +56,7 @@ class ViewController: UIViewController, MosaicCollectionViewLayoutDelegate, ASCo
     
     func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
         let videoItem = _sections[indexPath.section].items[indexPath.item]
-        let cellNode = ImageCellNode(with: videoItem.snippet.title, url:videoItem.snippet.thumbnails[.High]!.url);
+        let cellNode = ImageCellNode(with: videoItem.snippet.title, imageUrl:videoItem.snippet.thumbnails[.High]!.url);
         return cellNode;
     }
     
@@ -82,8 +82,7 @@ class ViewController: UIViewController, MosaicCollectionViewLayoutDelegate, ASCo
     
     internal func collectionView(_ collectionView: UICollectionView, layout: MosaicCollectionViewLayout, originalItemSizeAtIndexPath: IndexPath) -> CGSize {
         let videoItem = _sections[originalItemSizeAtIndexPath.section].items[originalItemSizeAtIndexPath.item]
-        return CGSize(width: Int(videoItem.snippet.thumbnails[.Medium]!.width), height: Int(videoItem.snippet.thumbnails[.Medium]!.height))
-//        return CGSize(width:320, height:180)
+        return CGSize(width: Int(videoItem.snippet.thumbnails[.Medium]!.width), height: Int(videoItem.snippet.thumbnails[.Medium]!.height + 84))
     }
 }
 

@@ -38,10 +38,10 @@ class MosaicCollectionViewLayout: UICollectionViewFlowLayout {
   
   required override init() {
     self.numberOfColumns = 2
-    self.columnSpacing = 10.0
+    self.columnSpacing = 5.0
     self.headerHeight = 44.0
-    self._sectionInset = UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0)
-    self.interItemSpacing = UIEdgeInsetsMake(10.0, 0, 10.0, 0)
+    self._sectionInset = UIEdgeInsetsMake(5.0, 5.0, 5.0, 5.0)
+    self.interItemSpacing = UIEdgeInsetsMake(5.0, 0, 5.0, 0)
     super.init()
     self.scrollDirection = .vertical
   }
