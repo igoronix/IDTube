@@ -29,25 +29,31 @@ class ServerProvider {
     class func performRequest<T: ResponseObjectSerializable>(request: URLRequest, type: T.Type, successCompletion:@escaping (_ result: AnyObject?) -> Void, failureCompletion:@escaping (_ error: AnyObject?) -> Void)  {
         let manager = Alamofire.SessionManager.default
         manager.session.configuration.timeoutIntervalForRequest = 120
+        debugPrint(request)
         manager.request(request).responseObject { (response: DataResponse<T>) in
             if let value = response.result.value {
+//                debugPrint(value as Any)
                 successCompletion(value as AnyObject?)
             } else {
+                debugPrint(response as Any)
                 failureCompletion(response.result as AnyObject?)
             }
         }
     }
 
-    class func getVideos(page: Int, successCompletion:@escaping (_ result: AnyObject?) -> Void, failureCompletion:@escaping (_ error: AnyObject?) -> Void) {
-        let params = ["key": consumerKey,"page": "\(page)", "part":"snippet,contentDetails,statistics,status", "chart":"mostPopular", "maxResults":"50"]
+    class func getVideos(pageToken: String?, successCompletion:@escaping (_ result: VideoItems?) -> Void, failureCompletion:@escaping (_ error: AnyObject?) -> Void) {
+        var params = ["key": consumerKey, "part":"snippet,contentDetails,statistics,status", "chart":"mostPopular", "maxResults":"20"]
+        if let token = pageToken {
+            params["pageToken"] = token
+        } else {
+            failureCompletion(nil)
+            return;
+        }
         do {
             let req = try URLEncoding.default.encode(URLRequest(url: ServerProvider.url(for: "/videos")), with: params)
-            
             self.performRequest(request: req, type: VideoItems.self, successCompletion: { (result) in
-                successCompletion(result)
-                debugPrint(result as Any)
+                successCompletion(result as! VideoItems?)
             }, failureCompletion: { (error) in
-                debugPrint(error as Any)
                 failureCompletion(error)
             })
         } catch {
@@ -152,12 +158,40 @@ struct VideoItem: ResponseObjectSerializable {
     }
 }
 
+struct PageInfo: ResponseObjectSerializable {
+    let totalResults: UInt
+    let resultsPerPage: UInt
+    
+    init?(response: HTTPURLResponse, representation: Any) {
+        guard let representation = representation as? [String: Any],
+            let totalResults = representation["totalResults"] as? UInt,
+            let resultsPerPage = representation["resultsPerPage"] as? UInt
+            else { return nil }
+        self.totalResults = totalResults
+        self.resultsPerPage = resultsPerPage
+    }
+}
+
+
 struct VideoItems: ResponseObjectSerializable {
-    let items: [VideoItem]
+    var nextPageToken:String?
+    var pageInfo:PageInfo?
+    var items: [VideoItem]
     
     init?(response: HTTPURLResponse, representation: Any) {
         var collection: [VideoItem] = []
         let representation = representation as? [String: Any]
+        
+        if let nextPageToken = representation?["nextPageToken"] as? String {
+            self.nextPageToken = nextPageToken
+        }
+        
+        if let pageInfoRep = representation?["pageInfo"] as? [[String: Any]] {
+            if let pageInfo = PageInfo(response: response, representation: pageInfoRep) {
+                self.pageInfo = pageInfo
+            }
+        }
+        
         if let items = representation?["items"] as? [[String: Any]] {
             for item in items {
                 if let videoItem = VideoItem(response: response, representation: item) {

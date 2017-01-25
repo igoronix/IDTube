@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		789992811E30CB7E008C62B9 /* GradientNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 789992801E30CB7E008C62B9 /* GradientNode.m */; };
 		789992841E30CBCF008C62B9 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 789992831E30CBCF008C62B9 /* UIImage+ImageEffects.m */; };
 		78F77BB31E2F75FC00E3F75A /* MosaicCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F77BB21E2F75FC00E3F75A /* MosaicCollectionViewLayout.swift */; };
-		78F77BB51E2F765900E3F75A /* ImageCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F77BB41E2F765900E3F75A /* ImageCellNode.swift */; };
+		78F77BB51E2F765900E3F75A /* VideoItemCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F77BB41E2F765900E3F75A /* VideoItemCellNode.swift */; };
 		78FD21FA1E2CF4D500C761D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FD21F91E2CF4D500C761D4 /* AppDelegate.swift */; };
 		78FD21FC1E2CF4D500C761D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FD21FB1E2CF4D500C761D4 /* ViewController.swift */; };
 		78FD21FF1E2CF4D500C761D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78FD21FD1E2CF4D500C761D4 /* Main.storyboard */; };
@@ -24,12 +23,10 @@
 		4277BEC0DE1FF7AF23791531 /* Pods_IDTube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IDTube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		745D14504F200362186B3B84 /* Pods-IDTube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IDTube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IDTube/Pods-IDTube.debug.xcconfig"; sourceTree = "<group>"; };
 		7899927B1E30CB31008C62B9 /* IDTube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IDTube-Bridging-Header.h"; sourceTree = "<group>"; };
-		7899927F1E30CB7E008C62B9 /* GradientNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientNode.h; sourceTree = "<group>"; };
-		789992801E30CB7E008C62B9 /* GradientNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientNode.m; sourceTree = "<group>"; };
 		789992821E30CBCF008C62B9 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		789992831E30CBCF008C62B9 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		78F77BB21E2F75FC00E3F75A /* MosaicCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MosaicCollectionViewLayout.swift; sourceTree = "<group>"; };
-		78F77BB41E2F765900E3F75A /* ImageCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCellNode.swift; sourceTree = "<group>"; };
+		78F77BB41E2F765900E3F75A /* VideoItemCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoItemCellNode.swift; sourceTree = "<group>"; };
 		78FD21F61E2CF4D500C761D4 /* IDTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IDTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78FD21F91E2CF4D500C761D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78FD21FB1E2CF4D500C761D4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -85,14 +82,12 @@
 			children = (
 				789992821E30CBCF008C62B9 /* UIImage+ImageEffects.h */,
 				789992831E30CBCF008C62B9 /* UIImage+ImageEffects.m */,
-				7899927F1E30CB7E008C62B9 /* GradientNode.h */,
-				789992801E30CB7E008C62B9 /* GradientNode.m */,
 				78FD220B1E2CF98000C761D4 /* API */,
 				78FD21F91E2CF4D500C761D4 /* AppDelegate.swift */,
 				7899927B1E30CB31008C62B9 /* IDTube-Bridging-Header.h */,
 				78FD21FB1E2CF4D500C761D4 /* ViewController.swift */,
 				78F77BB21E2F75FC00E3F75A /* MosaicCollectionViewLayout.swift */,
-				78F77BB41E2F765900E3F75A /* ImageCellNode.swift */,
+				78F77BB41E2F765900E3F75A /* VideoItemCellNode.swift */,
 				78FD21FD1E2CF4D500C761D4 /* Main.storyboard */,
 				78FD22001E2CF4D500C761D4 /* Assets.xcassets */,
 				78FD22021E2CF4D500C761D4 /* LaunchScreen.storyboard */,
@@ -242,11 +237,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				78F77BB31E2F75FC00E3F75A /* MosaicCollectionViewLayout.swift in Sources */,
-				789992811E30CB7E008C62B9 /* GradientNode.m in Sources */,
 				789992841E30CBCF008C62B9 /* UIImage+ImageEffects.m in Sources */,
 				78FD220D1E2CF9F600C761D4 /* ServerProvider.swift in Sources */,
 				78FD21FC1E2CF4D500C761D4 /* ViewController.swift in Sources */,
-				78F77BB51E2F765900E3F75A /* ImageCellNode.swift in Sources */,
+				78F77BB51E2F765900E3F75A /* VideoItemCellNode.swift in Sources */,
 				78FD21FA1E2CF4D500C761D4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,6 +362,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 745D14504F200362186B3B84 /* Pods-IDTube.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -388,6 +383,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CED17BA9223ED9946B92FBE1 /* Pods-IDTube.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = "";

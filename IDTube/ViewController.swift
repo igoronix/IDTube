@@ -11,11 +11,12 @@ import AsyncDisplayKit
 import AlamofireImage
 import Alamofire
 
-class ViewController: UIViewController, MosaicCollectionViewLayoutDelegate, ASCollectionDataSource, ASCollectionDelegate  {
+class ViewController: UIViewController, MosaicCollectionViewLayoutDelegate, ASCollectionDataSource {
 
-    var _sections = [VideoItems]()
+    var _sections :[[VideoItem]] = [[]]
     let _collectionNode: ASCollectionNode!
     let _layoutInspector = MosaicCollectionViewLayoutInspector()
+    var nextPageToken: String?
     
     required init?(coder aDecoder: NSCoder) {
         let layout = MosaicCollectionViewLayout()
@@ -25,6 +26,8 @@ class ViewController: UIViewController, MosaicCollectionViewLayoutDelegate, ASCo
         super.init(coder: aDecoder)
         layout.delegate = self
         
+        nextPageToken = ""
+        
         _collectionNode.dataSource = self;
         _collectionNode.delegate = self;
         _collectionNode.view.layoutInspector = _layoutInspector
@@ -32,12 +35,12 @@ class ViewController: UIViewController, MosaicCollectionViewLayoutDelegate, ASCo
         _collectionNode.view.isScrollEnabled = true
         _collectionNode.registerSupplementaryNode(ofKind: UICollectionElementKindSectionHeader)
         
-        ServerProvider.getVideos(page: 0, successCompletion: { (result) in
-            self._sections.append(result as! VideoItems)
-            self._collectionNode.reloadData()
-        }, failureCompletion: { (error) in
-            debugPrint(error as Any)
-        })
+//        ServerProvider.getVideos(page: 0, successCompletion: { (result) in
+//            self._sections.append(result as! VideoItems)
+//            self._collectionNode.reloadData()
+//        }, failureCompletion: { (error) in
+//            debugPrint(error as Any)
+//        })
     }
     
     deinit {
@@ -52,12 +55,6 @@ class ViewController: UIViewController, MosaicCollectionViewLayoutDelegate, ASCo
     
     override func viewWillLayoutSubviews() {
         _collectionNode.frame = self.view.bounds;
-    }
-    
-    func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
-        let videoItem = _sections[indexPath.section].items[indexPath.item]
-        let cellNode = ImageCellNode(with: videoItem.snippet.title, imageUrl:videoItem.snippet.thumbnails[.High]!.url);
-        return cellNode;
     }
     
     func collectionNode(_ collectionNode: ASCollectionNode, nodeForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> ASCellNode {
@@ -77,12 +74,55 @@ class ViewController: UIViewController, MosaicCollectionViewLayoutDelegate, ASCo
     }
     
     func collectionNode(_ collectionNode: ASCollectionNode, numberOfItemsInSection section: Int) -> Int {
-        return _sections[section].items.count
+        return _sections[section].count
     }
     
     internal func collectionView(_ collectionView: UICollectionView, layout: MosaicCollectionViewLayout, originalItemSizeAtIndexPath: IndexPath) -> CGSize {
-        let videoItem = _sections[originalItemSizeAtIndexPath.section].items[originalItemSizeAtIndexPath.item]
+        let videoItem = _sections[originalItemSizeAtIndexPath.section][originalItemSizeAtIndexPath.item]
         return CGSize(width: Int(videoItem.snippet.thumbnails[.Medium]!.width), height: Int(videoItem.snippet.thumbnails[.Medium]!.height + 84))
+    }
+}
+
+extension ViewController: ASCollectionDelegate {
+    
+    func nextPageWithCompletion(_ block: @escaping (_ results: [VideoItem]) -> ()) {
+        ServerProvider.getVideos(pageToken: self.nextPageToken, successCompletion: { (result) in
+            self.nextPageToken = result?.nextPageToken
+            if let res = result?.items {
+                block(res)
+            }
+        }, failureCompletion: { (error) in
+            debugPrint(error as Any)
+        })
+    }
+    
+    func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
+        let videoItem = _sections[indexPath.section][indexPath.item]
+        let cellNode = VideoItemCellNode(with: videoItem.snippet.title, imageUrl:videoItem.snippet.thumbnails[.High]!.url);
+        return cellNode;
+    }
+    
+    func collectionNode(_ collectionNode: ASCollectionNode, willBeginBatchFetchWith context: ASBatchContext) {
+        nextPageWithCompletion { (results) in
+            self.insertNewItems(videoItems:results)
+            
+            context.completeBatchFetching(true)
+        }
+    }
+    
+    func shouldBatchFetch(for collectionNode: ASCollectionNode) -> Bool {
+        return true
+    }
+    
+    func insertNewItems(videoItems:[VideoItem]) {
+        var indexPaths = [IndexPath]()
+        
+        for row in self._sections[0].count ..< (self._sections[0].count + videoItems.count) {
+            let path = IndexPath(row: row, section: 0)
+            indexPaths.append(path)
+        }
+        self._sections[0].append(contentsOf: videoItems)
+        self._collectionNode.insertItems(at: indexPaths)
     }
 }
 
