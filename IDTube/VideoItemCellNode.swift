@@ -5,11 +5,14 @@ class VideoItemCellNode: ASCellNode {
     
     let thumbnailImageNode: ASNetworkImageNode
     let descriptionTextNode: ASTextNode
-//    var title: String?
-    required init(with title:String?, imageUrl:String?) {
+//    fileprivate let backgroundImageNode: ASImageNode
+    let videoItem: VideoItem
+    required init(item:VideoItem) {
         
+//        backgroundImageNode = ASImageNode()
         thumbnailImageNode = ASNetworkImageNode()
         descriptionTextNode = ASTextNode()
+        videoItem = item
         
         super.init()
         
@@ -17,43 +20,54 @@ class VideoItemCellNode: ASCellNode {
         clipsToBounds = true
         
         //Animal Image
-        thumbnailImageNode.url = URL(string: imageUrl!)
+        thumbnailImageNode.url = URL(string: videoItem.snippet.thumbnails[.Medium]!.url)
         thumbnailImageNode.clipsToBounds = true
         thumbnailImageNode.delegate = self
-        thumbnailImageNode.placeholderFadeDuration = 0.25
-        thumbnailImageNode.contentMode = .scaleAspectFill
-//        thumbnailImageNode.shouldRenderProgressImages = true
-        thumbnailImageNode.placeholderEnabled = true
+        thumbnailImageNode.contentMode = .center
+        thumbnailImageNode.shouldRenderProgressImages = true
 //        thumbnailImageNode.shouldCacheImage = true
-        thumbnailImageNode.backgroundColor = UIColor(white: 0.777, alpha: 1.0)
+        thumbnailImageNode.placeholderEnabled = true
+        thumbnailImageNode.placeholderFadeDuration = 0.15
+        thumbnailImageNode.defaultImage = UIImage(named: "ic_wallpaper_48pt")
         
-        //Description
-//        self.title = title
-        descriptionTextNode.attributedText = NSAttributedString(string: title!)
+        thumbnailImageNode.borderWidth = 1
+        thumbnailImageNode.tintColor = UIColor(white: 0.777, alpha: 1.0)
+        thumbnailImageNode.borderColor = UIColor(white: 0.777, alpha: 1.0).cgColor
+
+//        Description
+        descriptionTextNode.attributedText = NSAttributedString(string: videoItem.snippet.title)
         descriptionTextNode.backgroundColor = UIColor.clear
         descriptionTextNode.placeholderEnabled = true
-        descriptionTextNode.placeholderFadeDuration = 0.25
+        descriptionTextNode.placeholderFadeDuration = 0.15
         descriptionTextNode.placeholderColor = UIColor(white: 0.777, alpha: 1.0)
+//
+//        //Background Image
+//        backgroundImageNode.placeholderFadeDuration = 0.15
+//        backgroundImageNode.placeholderEnabled = true
+//        backgroundImageNode.imageModificationBlock = { image in
+//            let h = CGFloat(self.videoItem.snippet.thumbnails[.Medium]!.height) + kIDDescriptionHeight
+//            let w = CGFloat(self.videoItem.snippet.thumbnails[.Medium]!.width)
+//
+//            let newImage = UIImage.resize(image, newSize: CGSize(width: w, height: h)).applyBlur(withRadius: 10, tintColor: UIColor(white: 0.5, alpha: 0.3), saturationDeltaFactor: 1.8, maskImage: nil)
+//            return (newImage != nil) ? newImage : image
+//        }
     
+//        addSubnode(backgroundImageNode)
         addSubnode(thumbnailImageNode)
         addSubnode(descriptionTextNode)
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        var imageRatio: CGFloat = 0.75
-        if thumbnailImageNode.image != nil {
-            imageRatio = (thumbnailImageNode.image?.size.height)! / (thumbnailImageNode.image?.size.width)!
-        }
-        
-        var newRatio = 1-imageRatio;
+        let fullHeight = CGFloat(videoItem.snippet.thumbnails[.Medium]!.height) + kIDDescriptionHeight
+
+        let imageRatio:CGFloat = constrainedSize.max.height / fullHeight
         let imageRatioSpec = ASRatioLayoutSpec(ratio: imageRatio, child: thumbnailImageNode)
         
-        if newRatio <= 0 {
-            newRatio = 0.25
-        }
-        let imageRatioSpec2 = ASRatioLayoutSpec(ratio: newRatio, child: descriptionTextNode)
+        let textRatio:CGFloat = kIDDescriptionHeight / fullHeight
+        let descriptionRatioSpec = ASRatioLayoutSpec(ratio: textRatio, child: descriptionTextNode)
         
-        let verticalStackSpec = ASStackLayoutSpec(direction: .vertical, spacing: 3, justifyContent: .center, alignItems: .stretch, children: [imageRatioSpec, imageRatioSpec2])
+        let verticalStackSpec = ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .start, alignItems: .center, children: [imageRatioSpec, descriptionRatioSpec])
+//        let backgroundLayoutSpec = ASBackgroundLayoutSpec(child: verticalStackSpec, background: backgroundImageNode)
         
         return verticalStackSpec
     }
@@ -63,6 +77,7 @@ class VideoItemCellNode: ASCellNode {
 
 extension VideoItemCellNode: ASNetworkImageNodeDelegate {
     func imageNode(_ imageNode: ASNetworkImageNode, didLoad image: UIImage) {
-        self.setNeedsLayout()
+//        self.backgroundImageNode.image = image
+//        self.setNeedsLayout()
     }
 }

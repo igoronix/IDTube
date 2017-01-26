@@ -11,6 +11,8 @@ import AsyncDisplayKit
 import AlamofireImage
 import Alamofire
 
+let kIDDescriptionHeight:CGFloat = 76.0
+
 class ViewController: UIViewController, MosaicCollectionViewLayoutDelegate, ASCollectionDataSource {
 
     var _sections :[[VideoItem]] = [[]]
@@ -79,7 +81,9 @@ class ViewController: UIViewController, MosaicCollectionViewLayoutDelegate, ASCo
     
     internal func collectionView(_ collectionView: UICollectionView, layout: MosaicCollectionViewLayout, originalItemSizeAtIndexPath: IndexPath) -> CGSize {
         let videoItem = _sections[originalItemSizeAtIndexPath.section][originalItemSizeAtIndexPath.item]
-        return CGSize(width: Int(videoItem.snippet.thumbnails[.Medium]!.width), height: Int(videoItem.snippet.thumbnails[.Medium]!.height + 84))
+        let size = CGSize(width: CGFloat(videoItem.snippet.thumbnails[.Medium]!.width), height: CGFloat(videoItem.snippet.thumbnails[.Medium]!.height) + kIDDescriptionHeight)
+        debugPrint("path \(originalItemSizeAtIndexPath) size = \(size)")
+        return size
     }
 }
 
@@ -98,7 +102,7 @@ extension ViewController: ASCollectionDelegate {
     
     func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
         let videoItem = _sections[indexPath.section][indexPath.item]
-        let cellNode = VideoItemCellNode(with: videoItem.snippet.title, imageUrl:videoItem.snippet.thumbnails[.High]!.url);
+        let cellNode = VideoItemCellNode(item: videoItem);
         return cellNode;
     }
     
