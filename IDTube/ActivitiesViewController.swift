@@ -1,21 +1,21 @@
 //
-//  ViewController.swift
+//  ActivitiesViewController.swift
 //  IDTube
 //
-//  Created by igor on 1/16/17.
+//  Created by igor on 1/31/17.
 //
 //
+
+import UIKit
 
 import UIKit
 import AsyncDisplayKit
 import AlamofireImage
 import Alamofire
 
-let kIDDescriptionHeight:CGFloat = 76.0
-
-class ViewController: UIViewController, MosaicCollectionViewLayoutDelegate, ASCollectionDataSource {
-
-    var _sections :[[VideoItem]] = [[]]
+class ActivitiesViewController: UIViewController, MosaicCollectionViewLayoutDelegate, ASCollectionDataSource {
+    
+    var _sections :[VideoItems] = []
     let _collectionNode: ASCollectionNode!
     let _layoutInspector = MosaicCollectionViewLayoutInspector()
     var nextPageToken: String?
@@ -36,6 +36,32 @@ class ViewController: UIViewController, MosaicCollectionViewLayoutDelegate, ASCo
         _collectionNode.backgroundColor = UIColor.white
         _collectionNode.view.isScrollEnabled = true
         _collectionNode.registerSupplementaryNode(ofKind: UICollectionElementKindSectionHeader)
+        
+        ServerProvider.getCategories(nextPageToken: self.nextPageToken, successCompletion: { (result) in
+            result.items.forEach({ (item) in
+                DispatchQueue.global().async {
+                    ServerProvider.getVideos(nextPageToken: nil, count:2, videoCategoryId:item.id, successCompletion: { (itemsForCategory) in
+                        guard itemsForCategory.items.count > 0 else { return }
+                        
+                        itemsForCategory.categoryTitle = item.snippet?.title
+                        self._sections.append(itemsForCategory)
+                        let newSectionIndex = self._sections.count - 1;
+                        self._collectionNode.performBatch(animated: true, updates: {
+                            self._collectionNode.insertSections(IndexSet(integer: newSectionIndex))
+                            var indexPaths = [IndexPath]()
+                            
+                            for row in 0..<itemsForCategory.items.count {
+                                indexPaths.append(IndexPath(row: row, section: newSectionIndex))
+                            }
+                            self._collectionNode.insertItems(at: indexPaths)
+                        }, completion: nil)
+                    }, failureCompletion: { (errorForCategory) in
+                    })
+                }
+            })
+        }) { (error) in
+            
+        }
     }
     
     deinit {
@@ -59,7 +85,11 @@ class ViewController: UIViewController, MosaicCollectionViewLayoutDelegate, ASCo
         ]
         let textInsets = UIEdgeInsets(top: 11, left: 0, bottom: 11, right: 0)
         let textCellNode = ASTextCellNode(attributes: textAttributes as! [AnyHashable : Any], insets: textInsets)
-        textCellNode.text = String(format: "Most popular", indexPath.section + 1)
+        
+        let videoItems = _sections[indexPath.section]
+        if let title = videoItems.categoryTitle {
+            textCellNode.text = "\(title)"//String(format: "Section %zd", indexPath.section + 1)
+        }
         return textCellNode;
     }
     
@@ -69,55 +99,23 @@ class ViewController: UIViewController, MosaicCollectionViewLayoutDelegate, ASCo
     }
     
     func collectionNode(_ collectionNode: ASCollectionNode, numberOfItemsInSection section: Int) -> Int {
-        return _sections[section].count
+        return _sections[section].items.count
     }
     
     internal func collectionView(_ collectionView: UICollectionView, layout: MosaicCollectionViewLayout, originalItemSizeAtIndexPath: IndexPath) -> CGSize {
-        let videoItem = _sections[originalItemSizeAtIndexPath.section][originalItemSizeAtIndexPath.item]
+        let videoItem = _sections[originalItemSizeAtIndexPath.section].items[originalItemSizeAtIndexPath.item]
         let size = CGSize(width: CGFloat(videoItem.snippet!.thumbnails[.Medium]!.width), height: CGFloat(videoItem.snippet!.thumbnails[.Medium]!.height) + kIDDescriptionHeight)
         debugPrint("path \(originalItemSizeAtIndexPath) size = \(size)")
         return size
     }
 }
 
-extension ViewController: ASCollectionDelegate {
-    
-    func nextPageWithCompletion(_ block: @escaping ([VideoItem]) -> ()) {
-        ServerProvider.getVideos(nextPageToken: self.nextPageToken, videoCategoryId: nil, successCompletion: { (result) in
-            self.nextPageToken = result.nextPageToken
-            block(result.items)
-        }, failureCompletion: { (error) in
-            debugPrint(error as Any)
-        })
-    }
+extension ActivitiesViewController: ASCollectionDelegate {
     
     func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
-        let videoItem = _sections[indexPath.section][indexPath.item]
+        let videoItem = _sections[indexPath.section].items[indexPath.item]
         let cellNode = VideoItemCellNode(item: videoItem);
         return cellNode;
-    }
-    
-    func collectionNode(_ collectionNode: ASCollectionNode, willBeginBatchFetchWith context: ASBatchContext) {
-        nextPageWithCompletion { (results) in
-            self.insertNewItems(videoItems:results)
-            
-            context.completeBatchFetching(true)
-        }
-    }
-    
-    func shouldBatchFetch(for collectionNode: ASCollectionNode) -> Bool {
-        return true
-    }
-    
-    func insertNewItems(videoItems:[VideoItem]) {
-        var indexPaths = [IndexPath]()
-        
-        for row in self._sections[0].count ..< (self._sections[0].count + videoItems.count) {
-            let path = IndexPath(row: row, section: 0)
-            indexPaths.append(path)
-        }
-        self._sections[0].append(contentsOf: videoItems)
-        self._collectionNode.insertItems(at: indexPaths)
     }
 }
 

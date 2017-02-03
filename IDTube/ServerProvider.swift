@@ -26,14 +26,17 @@ class ServerProvider {
         return URL.init(fileURLWithPath: fullPath, relativeTo: self.baseURL())
     }
     
-    class func performRequest<T: ResponseObjectSerializable>(request: URLRequest, type: T.Type, successCompletion:@escaping (_ result: AnyObject?) -> Void, failureCompletion:@escaping (_ error: AnyObject?) -> Void)  {
+    class func performRequest<T: ResponseObjectSerializable>(request: URLRequest, type: T.Type, successCompletion:@escaping(Any) -> Void, failureCompletion:@escaping(Any?) -> Void)  {
         let manager = Alamofire.SessionManager.default
         manager.session.configuration.timeoutIntervalForRequest = 120
         debugPrint(request)
-        manager.request(request).responseObject { (response: DataResponse<T>) in
+        
+        let req = manager.request(request)
+        req.validate()
+        let _ = req.responseObject { (response: DataResponse<T>) in
             if let value = response.result.value {
 //                debugPrint(value as Any)
-                successCompletion(value as AnyObject?)
+                successCompletion(value)
             } else {
                 debugPrint(response as Any)
                 failureCompletion(response.result as AnyObject?)
@@ -41,20 +44,77 @@ class ServerProvider {
         }
     }
 
-    class func getVideos(pageToken: String?, successCompletion:@escaping (_ result: VideoItems?) -> Void, failureCompletion:@escaping (_ error: AnyObject?) -> Void) {
-        var params = ["key": consumerKey, "part":"snippet,contentDetails,statistics,status", "chart":"mostPopular", "maxResults":"20"]
-        if let token = pageToken {
-            params["pageToken"] = token
-        } else {
-            failureCompletion(nil)
-            return;
+    class func getVideos(nextPageToken: String?, count: UInt, videoCategoryId: String?, successCompletion: @escaping(inout VideoItems) -> Void, failureCompletion: @escaping(Any?) -> Void) {
+        var params = ["key": consumerKey, "part":"snippet,contentDetails,statistics,status", "chart":"mostPopular", "maxResults":count] as [String : Any]
+        
+        if let categoryId = videoCategoryId {
+            params["videoCategoryId"] = categoryId
         }
+        
+        if let token = nextPageToken {
+            params["pageToken"] = token
+        }
+        
         do {
             let req = try URLEncoding.default.encode(URLRequest(url: ServerProvider.url(for: "/videos")), with: params)
             self.performRequest(request: req, type: VideoItems.self, successCompletion: { (result) in
-                successCompletion(result as! VideoItems?)
+                if var res = result as? VideoItems {
+                    successCompletion(&res)
+                } else {
+                    failureCompletion(result as AnyObject?)
+                }
             }, failureCompletion: { (error) in
                 failureCompletion(error)
+            })
+        } catch {
+            failureCompletion(error as AnyObject?)
+        }
+    }
+    
+    class func getVideos(nextPageToken: String?, videoCategoryId: String?, successCompletion: @escaping(inout VideoItems) -> Void, failureCompletion:@escaping (Any?) -> Void) {
+        self.getVideos(nextPageToken: nextPageToken, count: 20, videoCategoryId: videoCategoryId, successCompletion: successCompletion, failureCompletion: failureCompletion)
+    }
+
+    
+    class func getCategories(nextPageToken: String?, successCompletion:@escaping (VideoItems) -> Void, failureCompletion:@escaping (Any?) -> Void) {
+        var params = ["key": consumerKey, "part":"snippet", "maxResults":"20"]
+        
+        params["regionCode"] = Locale.current.regionCode
+        if let token = nextPageToken {
+            params["pageToken"] = token
+        }
+
+        do {
+            let req = try URLEncoding.default.encode(URLRequest(url: ServerProvider.url(for: "/videoCategories")), with: params)
+            self.performRequest(request: req, type: VideoItems.self, successCompletion: { (result) in
+                if let res = result as? VideoItems {
+                    successCompletion(res)
+                } else {
+                    failureCompletion(result as AnyObject?)
+                }
+            }, failureCompletion: { (error) in
+                failureCompletion(error)
+            })
+        } catch {
+            failureCompletion(error as AnyObject?)
+        }
+    }
+    
+    class func getActivities(nextPageToken: String?, successCompletion:@escaping (VideoItems) -> Void, failureCompletion:@escaping (Any?) -> Void) {
+        var params = ["key": consumerKey, "part":"snippet", "maxResults":"20", "home":"true"]
+        if let token = nextPageToken {
+            params["pageToken"] = token
+        }
+        do {
+            let req = try URLEncoding.default.encode(URLRequest(url: ServerProvider.url(for: "/activities")), with: params)
+            self.performRequest(request: req, type: VideoItems.self, successCompletion: { (result) in
+                if let res = result as? VideoItems {
+                    successCompletion(res)
+                } else {
+                    failureCompletion(result as AnyObject?)
+                }
+            }, failureCompletion: { (error) in
+                failureCompletion(error as AnyObject?)
             })
         } catch {
             failureCompletion(error as AnyObject?)
@@ -128,16 +188,20 @@ struct Snippet: ResponseObjectSerializable {
     
     init?(response: HTTPURLResponse, representation: Any) {
         guard let representation = representation as? [String: Any],
-            let title = representation["title"] as? String,
-            let thumbnailsRepresentation = representation["thumbnails"] as? [String: Any]
-            else { return nil }
+            let title = representation["title"] as? String
+            else {
+                return nil
+        }
         self.title = title
         self.channelTitle = representation["channelTitle"] as? String
         self.channelId = representation["channelId"] as? String
         var thumbnails:[ThumbnailKey: Thumbnail] = [:];
-        thumbnailsRepresentation.forEach { (thumbnailItem) in
-            if let thumbnail = Thumbnail(response: response, representation: thumbnailItem.value), let key = ThumbnailKey(rawValue: thumbnailItem.key) {
-                thumbnails[key] = thumbnail
+        
+        if let thumbnailsRepresentation = representation["thumbnails"] as? [String: Any] {
+            thumbnailsRepresentation.forEach { (thumbnailItem) in
+                if let thumbnail = Thumbnail(response: response, representation: thumbnailItem.value), let key = ThumbnailKey(rawValue: thumbnailItem.key) {
+                    thumbnails[key] = thumbnail
+                }
             }
         }
         self.thumbnails = thumbnails;
@@ -146,7 +210,7 @@ struct Snippet: ResponseObjectSerializable {
 
 struct VideoItem: ResponseObjectSerializable {
     let id: String
-    let snippet: Snippet
+    let snippet: Snippet?
     
     init?(response: HTTPURLResponse, representation: Any) {
         guard let representation = representation as? [String: Any],
@@ -154,7 +218,7 @@ struct VideoItem: ResponseObjectSerializable {
             let snippetRepresentation = representation["snippet"] as? [String: Any]
             else { return nil }
         self.id = id
-        self.snippet = Snippet(response: response, representation: snippetRepresentation)!
+        self.snippet = Snippet(response: response, representation: snippetRepresentation)
     }
 }
 
@@ -175,6 +239,7 @@ struct PageInfo: ResponseObjectSerializable {
 
 struct VideoItems: ResponseObjectSerializable {
     var nextPageToken:String?
+    var categoryTitle:String?
     var pageInfo:PageInfo?
     var items: [VideoItem]
     

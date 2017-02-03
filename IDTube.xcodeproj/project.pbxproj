@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		780470A01E40BA8700DB88CC /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804709F1E40BA8700DB88CC /* ActivitiesViewController.swift */; };
 		789992841E30CBCF008C62B9 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 789992831E30CBCF008C62B9 /* UIImage+ImageEffects.m */; };
 		78F77BB31E2F75FC00E3F75A /* MosaicCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F77BB21E2F75FC00E3F75A /* MosaicCollectionViewLayout.swift */; };
 		78F77BB51E2F765900E3F75A /* VideoItemCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F77BB41E2F765900E3F75A /* VideoItemCellNode.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		4277BEC0DE1FF7AF23791531 /* Pods_IDTube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IDTube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		745D14504F200362186B3B84 /* Pods-IDTube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IDTube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IDTube/Pods-IDTube.debug.xcconfig"; sourceTree = "<group>"; };
+		7804709F1E40BA8700DB88CC /* ActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 		7899927B1E30CB31008C62B9 /* IDTube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IDTube-Bridging-Header.h"; sourceTree = "<group>"; };
 		789992821E30CBCF008C62B9 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		789992831E30CBCF008C62B9 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				78FD21F91E2CF4D500C761D4 /* AppDelegate.swift */,
 				7899927B1E30CB31008C62B9 /* IDTube-Bridging-Header.h */,
 				78FD21FB1E2CF4D500C761D4 /* ViewController.swift */,
+				7804709F1E40BA8700DB88CC /* ActivitiesViewController.swift */,
 				78F77BB21E2F75FC00E3F75A /* MosaicCollectionViewLayout.swift */,
 				78F77BB41E2F765900E3F75A /* VideoItemCellNode.swift */,
 				78FD21FD1E2CF4D500C761D4 /* Main.storyboard */,
@@ -239,6 +242,7 @@
 				78F77BB31E2F75FC00E3F75A /* MosaicCollectionViewLayout.swift in Sources */,
 				789992841E30CBCF008C62B9 /* UIImage+ImageEffects.m in Sources */,
 				78FD220D1E2CF9F600C761D4 /* ServerProvider.swift in Sources */,
+				780470A01E40BA8700DB88CC /* ActivitiesViewController.swift in Sources */,
 				78FD21FC1E2CF4D500C761D4 /* ViewController.swift in Sources */,
 				78F77BB51E2F765900E3F75A /* VideoItemCellNode.swift in Sources */,
 				78FD21FA1E2CF4D500C761D4 /* AppDelegate.swift in Sources */,

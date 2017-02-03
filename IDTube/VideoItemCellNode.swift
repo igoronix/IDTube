@@ -20,7 +20,7 @@ class VideoItemCellNode: ASCellNode {
         clipsToBounds = true
         
         //Animal Image
-        thumbnailImageNode.url = URL(string: videoItem.snippet.thumbnails[.Medium]!.url)
+        thumbnailImageNode.url = URL(string: videoItem.snippet!.thumbnails[.Medium]!.url)
         thumbnailImageNode.clipsToBounds = true
         thumbnailImageNode.delegate = self
         thumbnailImageNode.contentMode = .center
@@ -35,7 +35,7 @@ class VideoItemCellNode: ASCellNode {
         thumbnailImageNode.borderColor = UIColor(white: 0.777, alpha: 1.0).cgColor
 
 //        Description
-        descriptionTextNode.attributedText = NSAttributedString(string: videoItem.snippet.title)
+        descriptionTextNode.attributedText = NSAttributedString(string: videoItem.snippet!.title)
         descriptionTextNode.backgroundColor = UIColor.clear
         descriptionTextNode.placeholderEnabled = true
         descriptionTextNode.placeholderFadeDuration = 0.15
@@ -58,7 +58,7 @@ class VideoItemCellNode: ASCellNode {
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        let fullHeight = CGFloat(videoItem.snippet.thumbnails[.Medium]!.height) + kIDDescriptionHeight
+        let fullHeight = CGFloat(videoItem.snippet!.thumbnails[.Medium]!.height) + kIDDescriptionHeight
 
         let imageRatio:CGFloat = constrainedSize.max.height / fullHeight
         let imageRatioSpec = ASRatioLayoutSpec(ratio: imageRatio, child: thumbnailImageNode)
