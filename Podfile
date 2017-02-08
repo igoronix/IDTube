@@ -9,5 +9,5 @@ target 'IDTube' do
 pod 'Alamofire'
 pod 'AlamofireImage'
 pod 'AsyncDisplayKit'
-
+pod 'FacebookLogin'
 end

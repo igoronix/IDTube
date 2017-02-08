@@ -23,7 +23,7 @@ class VideoItemCellNode: ASCellNode {
         thumbnailImageNode.url = URL(string: videoItem.snippet!.thumbnails[.Medium]!.url)
         thumbnailImageNode.clipsToBounds = true
         thumbnailImageNode.delegate = self
-        thumbnailImageNode.contentMode = .center
+        thumbnailImageNode.contentMode = .scaleAspectFit
         thumbnailImageNode.shouldRenderProgressImages = true
 //        thumbnailImageNode.shouldCacheImage = true
         thumbnailImageNode.placeholderEnabled = true

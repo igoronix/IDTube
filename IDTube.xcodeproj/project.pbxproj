@@ -17,6 +17,7 @@
 		78FD22011E2CF4D500C761D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78FD22001E2CF4D500C761D4 /* Assets.xcassets */; };
 		78FD22041E2CF4D500C761D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78FD22021E2CF4D500C761D4 /* LaunchScreen.storyboard */; };
 		78FD220D1E2CF9F600C761D4 /* ServerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FD220C1E2CF9F600C761D4 /* ServerProvider.swift */; };
+		78FF827F1E4B2B3A007052C0 /* FBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FF827E1E4B2B3A007052C0 /* FBViewController.swift */; };
 		930E1421A61C46340F3C7441 /* Pods_IDTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4277BEC0DE1FF7AF23791531 /* Pods_IDTube.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		78FD22031E2CF4D500C761D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		78FD22051E2CF4D500C761D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78FD220C1E2CF9F600C761D4 /* ServerProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerProvider.swift; sourceTree = "<group>"; };
+		78FF827E1E4B2B3A007052C0 /* FBViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBViewController.swift; sourceTree = "<group>"; };
 		CED17BA9223ED9946B92FBE1 /* Pods-IDTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IDTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-IDTube/Pods-IDTube.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +93,7 @@
 				7804709F1E40BA8700DB88CC /* ActivitiesViewController.swift */,
 				78F77BB21E2F75FC00E3F75A /* MosaicCollectionViewLayout.swift */,
 				78F77BB41E2F765900E3F75A /* VideoItemCellNode.swift */,
+				78FF827E1E4B2B3A007052C0 /* FBViewController.swift */,
 				78FD21FD1E2CF4D500C761D4 /* Main.storyboard */,
 				78FD22001E2CF4D500C761D4 /* Assets.xcassets */,
 				78FD22021E2CF4D500C761D4 /* LaunchScreen.storyboard */,
@@ -239,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78FF827F1E4B2B3A007052C0 /* FBViewController.swift in Sources */,
 				78F77BB31E2F75FC00E3F75A /* MosaicCollectionViewLayout.swift in Sources */,
 				789992841E30CBCF008C62B9 /* UIImage+ImageEffects.m in Sources */,
 				78FD220D1E2CF9F600C761D4 /* ServerProvider.swift in Sources */,
